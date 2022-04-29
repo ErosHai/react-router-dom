@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    #container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #app {
+      width: 300px;
+      height: 200px;
+      border: 1px solid red;
+      text-align: center;
+      line-height: 200px;
+    }
+
+    #result {
+      width: 300px;
+      height: 200px;
+      border: 1px solid blue;
+      text-align: center;
+      line-height: 200px;
+    }
+
+    #appAxios {
+      width: 300px;
+      height: 200px;
+      border: 1px solid green;
+      text-align: center;
+      line-height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="app"></div>
+    <div id="result"></div>
+    <div id="appAxios"></div>
+    <button>ajax</button>
+    <button>axios</button>
+  </div>
+
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // axios
+    const appAxios = document.getElementById('appAxios')
+    const axiosBtn = document.getElementsByTagName('button')[1]
+
+    axiosBtn.addEventListener('click', function () {
+      axios.get('http://127.0.0.1:3000/server', {
+        params: {
+          ID: 2124,
+          NAME: 'zhang san'
+        }
+      }).then(
+        function (response) {
+          console.log(response);
+          appAxios.innerHTML = response.data.job.type
+        }
+      ).catch(
+        function (error) {
+          console.log(error);
+        }
+      )
+    })
+
+    // ajax
+    const btn = document.getElementsByTagName('button')[0]
+    const app = document.getElementById('app')
+    const result = document.getElementById('result')
+
+
+    btn.addEventListener('click', function () {
+      const xhr = new XMLHttpRequest
+
+      xhr.open('GET', 'http://127.0.0.1:3000')
+      xhr.send()
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            app.innerHTML = xhr.response
+          }
+        }
+      }
+    })
+
+    result.addEventListener('mouseover', function () {
+      const xhr = new XMLHttpRequest()
+      // 自动处理json格式
+      xhr.responseType = 'json'
+
+      xhr.open('POST', 'http://127.0.0.1:3000')
+      xhr.send('person:wangwu&age:30')
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // const person = JSON.parse(xhr.response)
+            console.log('xhr.response', xhr.response)
+            result.innerHTML = xhr.response.job.type
+          }
+        }
+      }
+    })
+
+    sessionStorage.setItem('name','zhangsan')
+    sessionStorage.setItem('age','26')
+    sessionStorage.removeItem('name','zhangsan')
+
+    localStorage.setItem('name','wangwu')
+    // sessionStorage.clear()
+    console.log('age', sessionStorage.getItem('age'))
+  </script>
+</body>
+
+</html>

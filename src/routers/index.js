@@ -4,6 +4,7 @@ import News from '../components/Home/News'
 import Messages from '../components/Home/Messages'
 import Detail from '../components/Home/Messages/Detail'
 import NewContent from '../components/Home/News/NewContent'
+import Sign from '../components/Sign'
 import { Navigate } from 'react-router-dom'
 
 export default [
@@ -36,6 +37,10 @@ export default [
 	{
 		path: '/about',
 		element: <About />,
+	},
+	{
+		path: '/sign',
+		element: <Sign />,
 	},
 	{
 		path: '/',
