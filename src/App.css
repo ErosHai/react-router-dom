@@ -26,9 +26,10 @@ ul,li{
   color: white;
 }
 .container{
-  width: 500px;
+  width: 800px;
   height: 600px;
   margin: 0 auto;
+  padding: 10px;
   border: 1px solid red;
   border-radius: 3px;
 }
