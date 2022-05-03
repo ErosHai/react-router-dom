@@ -5,6 +5,7 @@ import { useParams, useLocation } from 'react-router-dom'
 export default function About() {
 	// params
 	const params = useParams()
+	console.log(params)
 
 	// state
 	const { state } = useLocation()
